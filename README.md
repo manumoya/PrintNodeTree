@@ -8,8 +8,7 @@ assumptions
 ===========
 
 1) there is an algorithm that evaluates over row=4 (in arrTree array) => diferent count of parentID != 0 ej: count(1,2,3,5) = 4
-2) there is an algorithm that evaluates over col=3 (in arrTree array) => maximum repeat of parentID + 1 ej: maxRepeat(3,3) = 2+1 = 3
-3) there is an algorithm that makes data input with this structure (arrTree array) ej:
+2) there is an algorithm that makes data input with this structure (arrTree array) ej:
 
 nodeID | parentID | integer
 ===========================

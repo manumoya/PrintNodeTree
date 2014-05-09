@@ -6,8 +6,7 @@ assumptions
 ===========
 
 1) there is an algorithm that evaluates over row=4 (in arrTree array) => diferent count of parentID != 0 ej: count(1,2,3,5) = 4
-2) there is an algorithm that evaluates over col=3 (in arrTree array) => maximum repeat of parentID + 1 ej: maxRepeat(3,3) = 2+1 = 3
-3) there is an algorithm that makes data input with this structure (arrTree array) ej:
+2) there is an algorithm that makes data input with this structure (arrTree array) ej:
 
 nodeID | parentID | integer
 ===========================
@@ -43,7 +42,7 @@ this solution is O(N^2), this represents an algorithm whose performance is direc
 */
 
 
-var row = 4, col=3, arrShow;
+var row = 5, col, arrShow;
 
 // tree input
 var arrTree = [	{"nodeID":1, "parentID":0, "integer":5},
@@ -52,9 +51,9 @@ var arrTree = [	{"nodeID":1, "parentID":0, "integer":5},
 								{"nodeID":4, "parentID":2, "integer":9},
 								{"nodeID":5, "parentID":3, "integer":4},
 								{"nodeID":6, "parentID":3, "integer":5},
-								{"nodeID":7, "parentID":5, "integer":2}/*,
+								{"nodeID":7, "parentID":5, "integer":2},
 								{"nodeID":8, "parentID":6, "integer":8},
-								{"nodeID":9, "parentID":6, "integer":7}*/
+								{"nodeID":9, "parentID":6, "integer":7}
 
 							];
 								
@@ -62,16 +61,17 @@ var arrTree = [	{"nodeID":1, "parentID":0, "integer":5},
 var createArrShow = (function () {
 	arrShow=new Array(row);
 	for (var i=0; i < row; i++){
-		arrShow[i]=new Array(col);
+		arrShow[i]=[];
 	}
 })();
 
 
 // f(x) print matriz 
 var printArrShow = function(){
+	var fila ="";
 	for (var i=0; i<row; i++){
-		var fila ="";
-		for (var j=0; j <col; j++){
+		fila="";
+		for (var j=0; j <arrShow[i].length; j++){
 			if ( arrShow[i][j] != undefined)
 				fila += arrShow[i][j].integer + " "
 			else
@@ -82,7 +82,7 @@ var printArrShow = function(){
 }
 
 var processTree = (function (callback) {
-	arrShow[0][0] = arrTree[0];
+	arrShow[0].push(arrTree[0]);
 	var x=0;
 	while (x < row){
 		var nextRow=x+1, auxCol=0;
@@ -90,7 +90,7 @@ var processTree = (function (callback) {
 			if ( arrShow[x][y] != undefined){	
 				for (var i=0; i<arrTree.length; i++){
 					if (arrShow[x][y].nodeID==arrTree[i].parentID){
-						arrShow[nextRow][auxCol] = arrTree[i];
+						arrShow[nextRow].push(arrTree[i]);
 						auxCol++;
 					}
 				}

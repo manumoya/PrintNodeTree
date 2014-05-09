@@ -38,3 +38,7 @@ Explain the big-O
 =================
 
 this solution is O(N^2), this represents an algorithm whose performance is directly proportional to the square of the size of the input data set. This is common with algorithms that involve nested iterations over the data set. Deeper nested iterations will result in O(N^3), O(N^4) etc.
+
+RUN 
+===
+node app.js

@@ -39,9 +39,6 @@ this solution is O(N^2), this represents an algorithm whose performance is direc
 
 */
 
-
-var row = 4, col, arrShow=[];
-
 // tree input
 var arrTree = [	{"nodeID":1, "parentID":0, "integer":5},
 								{"nodeID":2, "parentID":1, "integer":3},
@@ -51,17 +48,16 @@ var arrTree = [	{"nodeID":1, "parentID":0, "integer":5},
 								{"nodeID":6, "parentID":3, "integer":5},
 								{"nodeID":7, "parentID":5, "integer":2}/*,
 								{"nodeID":8, "parentID":6, "integer":8},
-								{"nodeID":9, "parentID":6, "integer":7}*/
-
+								{"nodeID":9, "parentID":7, "integer":7}*/
 							];
 							
 var lenArrTree = arrTree.length;
+var arrShow=[];
 								
-
 // f(x) print matriz 
 var printArrShow = function(){
 	var fila ="";
-	for (var i=0; i<row; i++){
+	for (var i=0; i<arrShow.length; i++){
 		fila="";
 		for (var j=0; j <arrShow[i].length; j++){
 			if ( arrShow[i][j] != undefined)
@@ -73,26 +69,27 @@ var printArrShow = function(){
 	}
 }
 
+// f(x) process tree and show
 var processTree = (function (callback) {
+	var row=0, contNode=0;
 	arrShow[0]=[];
 	arrShow[0].push(arrTree[0]);
-	var x=0;
-	while (x <= lenArrTree){
-		var nextRow=x+1, auxCol=0;
+	
+	while (contNode < lenArrTree-1){
+		var nextRow=row+1, auxCol=0;
 		arrShow[nextRow]=[];
-		for (var y=0; y < arrShow[x].length; y++){
-			if ( arrShow[x][y] != undefined){	
+		for (var y=0; y < arrShow[row].length; y++){
+			if ( arrShow[row][y] != undefined){	
 				for (var i=0; i<arrTree.length; i++){
-					if (arrShow[x][y].nodeID==arrTree[i].parentID){
-						arrShow[nextRow].push(arrTree[i]);
+					if (arrShow[row][y].nodeID==arrTree[i].parentID){
+						arrShow[row+1].push(arrTree[i]);
 						auxCol++;
+						contNode++;
 					}
 				}
 			}
 		}
-		x++;
-		if (x==row){
-			callback();
-		}
-	}			
+		row++;
+	}
+	callback();			
 })(printArrShow);

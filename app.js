@@ -5,8 +5,7 @@ http://www.interviewzen.com/apply/4WBRgj
 assumptions
 ===========
 
-1) there is an algorithm that evaluates over row=4 (in arrTree array) => diferent count of parentID != 0 ej: count(1,2,3,5) = 4
-2) there is an algorithm that makes data input with this structure (arrTree array) ej:
+1) there is an algorithm that makes data input with this structure (arrTree array) ej:
 
 nodeID | parentID | integer
 ===========================
@@ -26,13 +25,12 @@ approach of solutions
 main function - processTree() -
 -------------
 1) there is an structure for input data (explain un assumptions) y basicly contain tree node with relation (parent/child), this can storage enythin tree node
-
 2) For print used an matriz structure for storage data and then print values 
 
 aux function
 ------------
-3) there is function for create Matriz (createArrShow())
-4) there is function for print Matriz (printArrShow())
+
+3) there is function for print Matriz (printArrShow())
 
 Explain the big-O
 =================
@@ -42,7 +40,7 @@ this solution is O(N^2), this represents an algorithm whose performance is direc
 */
 
 
-var row = 5, col, arrShow;
+var row = 4, col, arrShow=[];
 
 // tree input
 var arrTree = [	{"nodeID":1, "parentID":0, "integer":5},
@@ -51,20 +49,14 @@ var arrTree = [	{"nodeID":1, "parentID":0, "integer":5},
 								{"nodeID":4, "parentID":2, "integer":9},
 								{"nodeID":5, "parentID":3, "integer":4},
 								{"nodeID":6, "parentID":3, "integer":5},
-								{"nodeID":7, "parentID":5, "integer":2},
+								{"nodeID":7, "parentID":5, "integer":2}/*,
 								{"nodeID":8, "parentID":6, "integer":8},
-								{"nodeID":9, "parentID":6, "integer":7}
+								{"nodeID":9, "parentID":6, "integer":7}*/
 
 							];
+							
+var lenArrTree = arrTree.length;
 								
-// fx create matriz
-var createArrShow = (function () {
-	arrShow=new Array(row);
-	for (var i=0; i < row; i++){
-		arrShow[i]=[];
-	}
-})();
-
 
 // f(x) print matriz 
 var printArrShow = function(){
@@ -82,10 +74,12 @@ var printArrShow = function(){
 }
 
 var processTree = (function (callback) {
+	arrShow[0]=[];
 	arrShow[0].push(arrTree[0]);
 	var x=0;
-	while (x < row){
+	while (x <= lenArrTree){
 		var nextRow=x+1, auxCol=0;
+		arrShow[nextRow]=[];
 		for (var y=0; y < arrShow[x].length; y++){
 			if ( arrShow[x][y] != undefined){	
 				for (var i=0; i<arrTree.length; i++){
